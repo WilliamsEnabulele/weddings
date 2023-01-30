@@ -1,1 +1,5 @@
-<p>photos works!</p>
+<div class="wd-container" *ngFor="let img of photos">
+    <div class="reveal">
+        <img src="{{img.url}}">
+    </div>
+</div>

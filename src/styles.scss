@@ -1,1 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    font-family: Montserrat;
+}
+
+body {
+    background: #ffffff;
+}
+
+@font-face {
+    font-family: Jenna;
+    src: url(assets/font/JennaSue.ttf) format("opentype");
+}
+
+.header {
+    font-family: Jenna;
+    font-size: 50px;
+    padding-top: 15px;
+}
+
+h3 {
+    font-family: Jenna;
+    font-size: 45px;
+}
+
+h1 {
+    font-family: Jenna;
+    font-weight: 1000;
+    font-size: 55px;
+}
+
+.error {
+    color: rgb(255, 131, 131);;
+  }
+
+  
+
+  .wd-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+  }
+  
+  .wd-container:nth-child(1) {
+    background: #ffd5ab;
+  }
+  
+  .wd-container:nth-child(2) {
+    background:#f9f9f9;
+  }
+  
+  .reveal {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    max-width: 800px;
+    overflow: hidden;
+  }

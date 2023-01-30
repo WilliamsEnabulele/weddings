@@ -1,1 +1,56 @@
-<p>landing works!</p>
+<div class="wd-container">
+  <div class="reveal">
+    <img class="img-fluid rounded" src="../../../assets/img/godwin_ebele_wide.jpg" alt="Godwin Ebele Wide Angle Pic">
+
+  </div>
+</div>
+<div class="wd-container">
+  <div class="reveal">
+    <h3 class="text-center mt-5 mb-5">Well Wishes</h3>
+    <div id="captions mb-5" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner  carousel">
+        <div class="carousel-item active" *ngFor="let wish of wishes; let i = index;" [ngClass]="{'active': activeSlide == i}">
+          <div class="text-center text-white bg-wishes p-5">
+            <p class="mb-2"><span>"</span> {{wish?.message}}</p>
+            <span class="d-flex align-items-center justify-content-center"><app-avatar [name]='wish.name!'
+                [size]="avatarSize"></app-avatar>
+              <h6 class="ms-2">{{wish.name}}</h6>
+            </span>
+            <span><small>{{wish?.createdAt | date }}</small></span>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev btn-dark" type="button " data-bs-target="#captions"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next btn-dark" type="button" data-bs-target="#captions"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <div>
+    <button class="btn btn-sm btn-dark wishes p-2" (click)="openModal()">Send Wishes</button>
+  </div>
+  <app-modal [title]="title" *ngIf="isModalOpen" (closed)="handleModalClose()">
+    <form class="w-100" [formGroup]="form" (ngSubmit)="submit()">
+      <label>
+        Name:
+        <input type="text" formControlName="name">
+      </label>
+      <p class="error" *ngIf="fc.name.invalid">
+        Name is required
+      </p>
+      <label>
+        Message:
+        <textarea formControlName="message"></textarea>
+      </label>
+      <p class="error" *ngIf="fc.message.invalid">
+        Message is required
+      </p>
+      <button type="submit" [disabled]="form.invalid">Submit</button>
+    </form>
+  </app-modal>

@@ -5,26 +5,23 @@ import { GiftsComponent } from './pages/gifts/gifts.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { PhotosComponent } from './pages/photos/photos.component';
-import { RsvpComponent } from './pages/rsvp/rsvp.component';
-import { ScreamComponent } from './pages/scream/scream.component';
+import { VenueComponent } from './pages/venue/venue.component';
+import { StreamComponent } from './pages/stream/stream.component';
 
 const routes: Routes = [
   {
     path: '',
     component: MainComponent,
     children: [
+     
       {
-        path:'',
-        redirectTo: 'home',
-        pathMatch:'full'
+        path: '',
+        component: LandingComponent,
+        pathMatch: 'full'
       },
       {
-        path: 'home',
-        component: LandingComponent
-      },
-      {
-        path: 'rsvp',
-        component: RsvpComponent
+        path: 'venue',
+        component: VenueComponent
       },
       {
         path: 'gifts',
@@ -35,8 +32,8 @@ const routes: Routes = [
         component: PhotosComponent
       },
       {
-        path: 'scream',
-        component: ScreamComponent
+        path: 'stream',
+        component: StreamComponent
       },
       {
         path: '*',
