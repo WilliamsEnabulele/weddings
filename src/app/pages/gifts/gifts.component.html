@@ -36,13 +36,13 @@
             <form [formGroup]="form">
                 <label>Email</label>
                 <input class="form-control mb-2" type="email" placeholder="Enter Email" formControlName="email">
-                <p class="error" *ngIf="fc.email.invalid && fc.email.dirty">Email is required</p>
+                <p class="error" *ngIf="fc.email.invalid">Email is required</p>
                 <label>Amount</label>
                 <input class="form-control" type="number" placeholder="Enter amount to be gifted" formControlName="amount">
-                <p class="error" *ngIf="fc.amount.invalid && fc.amount.dirty">Amount is required</p>
+                <p class="error" *ngIf="fc.amount.invalid">Amount is required</p>
                 <button type="button" class="btn btn-dark mt-2" custom-paystack (disabled)="form.invalid"
                 [key]="key" [email]="fc.email.value!" [amount]="fc.amount.value!"
-                [class]="'btn btn-primary'" (paymentInit)="paymentInit()" (onClose)="paymentCancel()"
+                [class]="'btn btn-primary'" (onClose)="paymentCancel()"
                 (callback)="paymentDone($event)">Make Payment</button>
             </form>
         </div>

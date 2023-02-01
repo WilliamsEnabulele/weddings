@@ -1,6 +1,6 @@
 .wd-brand {
     font-family: Jenna;
-    font-size: 30px;
+    font-size: 25px;
     padding-top: 15px;
 }
 
@@ -10,21 +10,21 @@ a {
 }
 
 .wd-nav-bar {
-    padding: 10px;
-    width: fit-content;
-    height: auto;
+    padding: 5px 5px;
     background: #000;
     color: #fff;
     display: flex;
     z-index: 999;
     align-items: center;
     position: absolute;
-
+    left: 5px;
+    top: 5px;
+    border-radius: 5px;
 }
 
 .wd-collapse-nav {
-    margin-top: 90px;
-    width: 185px;
+    margin-top: 70px;
+    width: 130px;
     padding: 15px;
     background: rgba(0, 0, 0, 0);
     z-index: 999;
@@ -65,7 +65,7 @@ a {
 }
 
 #nav-icon {
-    width: 40px;
+    width: 20px;
     height: 5px;
     position: relative;
     margin-left: 10px;

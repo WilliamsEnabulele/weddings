@@ -33,8 +33,8 @@ export class GiftsComponent {
   }
 
   form = new FormGroup({
-    email: new FormControl('', [Validators.required]),
-    amount: new FormControl(0.00, [Validators.required])
+    email: new FormControl('', [Validators.required, Validators.email]),
+    amount: new FormControl(0.00, [Validators.required, Validators.max(500000)])
   });
 
   constructor(private productService: ProductService) {
@@ -48,6 +48,7 @@ export class GiftsComponent {
   handleModalClose() {
     this.isModalOpen = false;
     this.sayThankYou =false;
+    this.form.reset();
   }
 
   ngOnInit() {
@@ -81,20 +82,15 @@ export class GiftsComponent {
     }})
   }
 
-  paymentInit() {
-    console.log('Payment initialized');
-    this.reference = `ref-${Math.ceil(Math.random() * 10e13)}`;
-    this.form.reset();
-  }
-
   paymentDone(ref: any) {
-    this.title = 'Payment successfull';
+    this.title = 'Payment successfull, close modal';
     console.log(ref);
     let amount = this.form.get('amount')?.value;
     let progress = this.calculateProgress(amount, this.currentProductId);
     this.product.progress = progress;
     this.productService.update(this.currentProductId, this.product).then(() => {
       this.sayThankYou = true;
+      this.form.reset();
     })
   }
 

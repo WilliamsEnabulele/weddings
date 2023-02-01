@@ -9,18 +9,18 @@ export class PaystackDirective {
   @Input() email!: string;
   @Input() amount!: number;
   @Input() key!: string;
-  @Output() paymentInitEvent!: EventEmitter<any>;
-  @Output() paymentCancelEvent!: EventEmitter<any>;
-  @Output() paymentDoneEvent!: EventEmitter<any>;
+  @Output() callback = new EventEmitter<any>();
+  @Output() onClose = new EventEmitter<any>();
   PaystackPop: any;
 
   constructor(private paystack: PaystackService){
 
   }
 
-  paymentInit (e: Event) {
+  cpaymentInit (e: Event) {
+    console.log('TRIGGERED 1')
     e.preventDefault();
-    console.log('TRIGGERED')
+    console.log('TRIGGERED 2')
     let handler = this.PaystackPop.setup({
       key: this.key,
       email: this.email,
@@ -28,29 +28,13 @@ export class PaystackDirective {
       currency: 'NGN', 
       ref: '' + Math.floor((Math.random() * 1000000000) + 1),
       onClose: (data: any) => {
-        this.paymentCancel = data;
+        this.onClose = data;
       },
       callback: (response: any) => {
-        this.paymentDone(response.reference);
+        this.callback = response.reference;
       }
     });
     handler.openIframe();
   }
-
-  paymentDone(ref: string){
-    this.paystack.confirmPayment(ref).subscribe({
-      next: (data: any) => {
-        this.paymentDoneEvent = data;
-      },
-      error: () => {
-        // Todo
-      }
-    });
-  }
-  
-  paymentCancel(data: any){
-    this.paymentCancelEvent = data;
-  }
-  
 
 }
