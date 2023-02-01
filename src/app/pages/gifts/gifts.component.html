@@ -27,7 +27,11 @@
 </div>
 
 <app-modal [title]="title" *ngIf="isModalOpen" (closed)="handleModalClose()">
-    <div class="row">
+    <div *ngIf="sayThankYou">
+        <ng-lottie [options]="options" (animationCreated)="animationCreated($event)"></ng-lottie>
+        <h1 class="text-center">Thank you</h1>
+    </div>
+    <div class="row" *ngIf="!sayThankYou">
         <div class="col-12">
             <form [formGroup]="form">
                 <label>Email</label>

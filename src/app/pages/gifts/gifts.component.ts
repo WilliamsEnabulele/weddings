@@ -45,6 +45,7 @@ export class GiftsComponent {
 
   handleModalClose() {
     this.isModalOpen = false;
+    this.sayThankYou =false;
   }
 
   ngOnInit() {
@@ -81,7 +82,6 @@ export class GiftsComponent {
     console.log('Payment initialized');
     this.reference = `ref-${Math.ceil(Math.random() * 10e13)}`;
     this.form.reset();
-    this.handleModalClose();
   }
 
   paymentDone(ref: any) {
