@@ -1,5 +1,11 @@
 <div class="wd-container" *ngFor="let img of photos">
-    <div class="reveal">
+    <div class="reveal" 
+    data-aos="zoom-out-down"
+    data-aos-offset="200"
+    data-aos-easing="ease-in-out"
+    data-aos-duration="1000"
+    data-aos-mirror="true"
+    data-aos-once="false">
         <img src="{{img.url}}">
     </div>
 </div>

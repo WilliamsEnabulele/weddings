@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { ProductService } from 'src/app/services/product.service';
-import { Product } from 'src/app/types/product';
+import { Product } from 'src/app/shared/types/product';
+import { AnimationItem } from 'lottie-web';
+import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-gifts',
@@ -17,6 +19,16 @@ export class GiftsComponent {
   product: any;
   currentProductId!: string;
   isModalOpen = false;
+  loading = true;
+  sayThankYou = false;
+
+  options: AnimationOptions = {
+    path: '/assets/lotties/confetti.json',
+  };
+
+  animationCreated(animationItem: AnimationItem): void {
+    console.log(animationItem);
+  }
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required]),
@@ -55,9 +67,14 @@ export class GiftsComponent {
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
         )
       )
-    ).subscribe(data => {
-      this.products = data;
-    });
+    ).subscribe({
+      next: (data: any) => {
+        this.loading = false;
+        this.products = data;
+      error: () => {
+        this.loading = false;
+      }
+    }})
   }
 
   paymentInit() {
@@ -74,7 +91,7 @@ export class GiftsComponent {
     let progress = this.calculateProgress(amount, this.currentProductId);
     this.product.progress = progress;
     this.productService.update(this.currentProductId, this.product).then(() => {
-      console.log("thank you");
+      this.sayThankYou = true;
     })
   }
 

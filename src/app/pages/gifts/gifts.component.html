@@ -1,8 +1,9 @@
-<div class="container">
-    <section>
+<div class="wd-container bg-white">
+    <section class="reveal">
         <div class="container mt-5">
-            <div class="row mb-3">
-                <div class="col-6 col-lg-4 mb-4 mb-lg-0" *ngFor="let product of products">
+            <app-loader *ngIf="loading"></app-loader>
+            <div class="row mb-3" *ngIf="!loading">
+                <div class="col-sm-12 col-lg-4  mb-2 mt-5" *ngFor="let product of products">
                     <div class="card">
                         <img src="{{product?.image_url}}" class="card-img-top" alt="Laptop" />
                         <div class="card-body">
@@ -24,19 +25,21 @@
         </div>
     </section>
 </div>
+
 <app-modal [title]="title" *ngIf="isModalOpen" (closed)="handleModalClose()">
     <div class="row">
         <div class="col-12">
             <form [formGroup]="form">
-
+                <label>Email</label>
                 <input class="form-control mb-2" type="email" placeholder="Enter Email" formControlName="email">
                 <p class="error" *ngIf="fc.email.invalid && fc.email.dirty">Email is required</p>
+                <label>Amount</label>
                 <input class="form-control" type="number" placeholder="Enter amount to be gifted" formControlName="amount">
                 <p class="error" *ngIf="fc.amount.invalid && fc.amount.dirty">Amount is required</p>
                 <button type="button" class="btn btn-dark mt-2" angular4-paystack (disabled)="form.invalid"
                     [key]="'pk_test_3692417b8ab0a3a9edd73e03dfffd16b359c9470'" [email]="fc.email.value!" [amount]="fc.amount.value! * 100" [ref]="reference"
                     [class]="'btn btn-primary'" (paymentInit)="paymentInit()" (onClose)="paymentCancel()"
-                    (callback)="paymentDone($event)">Drop Gift</button>
+                    (callback)="paymentDone($event)">Make Payment</button>
             </form>
         </div>
     </div>

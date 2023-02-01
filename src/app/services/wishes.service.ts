@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Wish } from '../types/wish';
+import { Wish } from '../shared/types/wish';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 @Injectable({

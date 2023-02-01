@@ -33,7 +33,6 @@ img {
 
 * {
   padding: 0;
-  margin: 0;
   box-sizing: border-box;
 }
 
@@ -43,26 +42,39 @@ img {
   background: linear-gradient(90deg, rgba(255, 15, 123, 0.39) 0%, rgba(248, 155, 42, 0.356) 100%);
 }
 
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
 
+.slide {
+  padding: 15px 15px;
+  border-radius: 15px;
+  background: linear-gradient(90deg, rgba(255, 15, 123, 0.39) 0%, rgba(248, 155, 42, 0.356) 100%);
+  display: none;
+}
 
+.slide.active {
+  display: block;
+}
 
+.wd-btn-wrapper {
+  display: flex;
+  position: absolute;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.wd-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: #000;
+  color: #fff;
+  padding: 5px;
+  margin-right: 25px;
+  margin-top: 15px;
+}
 
 .wishes {
   position: absolute;
@@ -71,9 +83,6 @@ img {
   bottom: 50%;
   z-index: 566;
 }
-
-
-.img-container {}
 
 .img-container:after {
   content: "";
@@ -144,6 +153,29 @@ button[type="submit"]:hover {
 }
 
 .icon {
-  font-size: 35px;
-  color: #fff;
+  font-size: 45px;
+  color: rgb(0, 0, 0);
+}
+
+.heading {
+  position: absolute;
+  bottom: 15px;
+}
+
+.heading h1 {
+  font-family: Montserrat;
+  font-size: 55px;
+  font-weight: 800;
+  z-index: 999;
+  width: 100%;
+  padding: 15px 15px;
+}
+
+.text-dark {
+  color: #000;
+  font-size: 25px;
+}
+
+span small {
+  font-size: 16px;
 }

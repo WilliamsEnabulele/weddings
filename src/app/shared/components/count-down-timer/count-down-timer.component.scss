@@ -1,0 +1,33 @@
+.count-down {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    margin-top: 25px;
+}
+
+.count-down span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-right: 15px;
+    padding: 15px;
+    color: rgb(58, 58, 58);
+    font-weight: 800;
+    border-radius: 10px;
+}
+
+.count-down span:nth-child(1){
+    background: rgba(255, 173, 173, 0.623);
+}
+
+.count-down span:nth-child(2){
+    background: rgb(168, 255, 168);
+}
+.count-down span:nth-child(3){
+    background: rgb(172, 172, 255);
+}
+.count-down span:nth-child(4){
+    background: rgb(255, 238, 205);
+}

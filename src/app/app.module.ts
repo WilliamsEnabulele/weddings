@@ -3,12 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Angular4PaystackModule } from 'angular4-paystack';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+
 import { environment } from 'src/environments/environment';
 
 
@@ -21,10 +26,15 @@ import { StreamComponent } from './pages/stream/stream.component';
 import { MainComponent } from './layout/main/main.component';
 import { GiftsComponent } from './pages/gifts/gifts.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { MenuComponent } from './shared/menu/menu.component';
-import { ModalComponent } from './shared/modal/modal.component';
-import { AvatarComponent } from './shared/avatar/avatar.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
+import { AvatarComponent } from './shared/components/avatar/avatar.component';
+import { CountDownTimerComponent } from './shared/components/count-down-timer/count-down-timer.component';
+import { LoaderComponent } from './shared/components/loader/loader.component';
+
+export function playerFactory() {
+  return player;
+}
 
 @NgModule({
   declarations: [
@@ -37,9 +47,10 @@ import { AvatarComponent } from './shared/avatar/avatar.component';
     GiftsComponent,
     NotfoundComponent,
     HeaderComponent,
-    MenuComponent,
     ModalComponent,
-    AvatarComponent
+    AvatarComponent,
+    CountDownTimerComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -47,13 +58,15 @@ import { AvatarComponent } from './shared/avatar/avatar.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     Angular4PaystackModule.forRoot('pk_test_3692417b8ab0a3a9edd73e03dfffd16b359c9470'),
+    FlexLayoutModule,
 
     AngularFireModule.initializeApp(
       environment.firebaseConfig),
       AngularFireAuthModule,
       AngularFirestoreModule,
       AngularFireStorageModule,
-      AngularFireDatabaseModule
+      AngularFireDatabaseModule,
+      LottieModule.forRoot({ player: playerFactory })
   ],
   providers: [],
   bootstrap: [AppComponent]

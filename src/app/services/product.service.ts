@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../types/product';
+import { Product } from '../shared/types/product';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 @Injectable({

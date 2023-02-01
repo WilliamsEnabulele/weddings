@@ -13,7 +13,6 @@ const routes: Routes = [
     path: '',
     component: MainComponent,
     children: [
-     
       {
         path: '',
         component: LandingComponent,

@@ -1,0 +1,20 @@
+<nav class="wd-nav-bar">
+    <a class="wd-brand">Godwin^Ebele</a>
+    <div id="nav-icon" [ngClass]="{ 'open': isOpen }" (click)="openMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+</nav>
+<div class="wd-collapse-nav" *ngIf="isOpen">
+    <ul>
+        <li class="mb-2 mt-2 me-2"><a routerLink="/" routerLinkActive="active">Home</a></li>
+        <li class="mb-2 mt-2 me-2"><a routerLink="/gifts" routerLinkActive="active">Gifts</a></li>
+        <li class="mb-2 mt-2 me-2"><a routerLink="/photos" routerLinkActive="active">Photos</a></li>
+          <li class="mb-2 mt-2 me-2"><a routerLink="/venue" routerLinkActive="active">Venue</a></li>
+      <li class="mb-2 mt-2 me-2"><a routerLink="/stream" routerLinkActive="active">Stream</a></li>
+      </ul>
+</div>
+
+
+
