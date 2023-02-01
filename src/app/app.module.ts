@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Angular4PaystackModule } from 'angular4-paystack';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AngularFireModule } from '@angular/fire/compat';
@@ -31,6 +31,7 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { AvatarComponent } from './shared/components/avatar/avatar.component';
 import { CountDownTimerComponent } from './shared/components/count-down-timer/count-down-timer.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { PaystackDirective } from './shared/directives/paystack.directive';
 
 export function playerFactory() {
   return player;
@@ -50,14 +51,15 @@ export function playerFactory() {
     ModalComponent,
     AvatarComponent,
     CountDownTimerComponent,
-    LoaderComponent
+    LoaderComponent,
+    PaystackDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     ReactiveFormsModule,
-    Angular4PaystackModule.forRoot('pk_test_3692417b8ab0a3a9edd73e03dfffd16b359c9470'),
     FlexLayoutModule,
 
     AngularFireModule.initializeApp(

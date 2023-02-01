@@ -5,6 +5,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/shared/types/product';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-gifts',
@@ -21,6 +22,7 @@ export class GiftsComponent {
   isModalOpen = false;
   loading = true;
   sayThankYou = false;
+  key = environment.paystack_key;
 
   options: AnimationOptions = {
     path: '/assets/lotties/confetti.json',
@@ -55,6 +57,7 @@ export class GiftsComponent {
 
   calculateProgress(amount: any, id: string) {
     this.productService.getOne(id).subscribe((data: Product) => {
+      console.log(data);
       this.product = data;
     })
     let currentPrice = this.product.price - amount;

@@ -40,10 +40,10 @@
                 <label>Amount</label>
                 <input class="form-control" type="number" placeholder="Enter amount to be gifted" formControlName="amount">
                 <p class="error" *ngIf="fc.amount.invalid && fc.amount.dirty">Amount is required</p>
-                <button type="button" class="btn btn-dark mt-2" angular4-paystack (disabled)="form.invalid"
-                    [key]="'pk_test_3692417b8ab0a3a9edd73e03dfffd16b359c9470'" [email]="fc.email.value!" [amount]="fc.amount.value! * 100" [ref]="reference"
-                    [class]="'btn btn-primary'" (paymentInit)="paymentInit()" (onClose)="paymentCancel()"
-                    (callback)="paymentDone($event)">Make Payment</button>
+                <button type="button" class="btn btn-dark mt-2" custom-paystack (disabled)="form.invalid"
+                [key]="key" [email]="fc.email.value!" [amount]="fc.amount.value!"
+                [class]="'btn btn-primary'" (paymentInit)="paymentInit()" (onClose)="paymentCancel()"
+                (callback)="paymentDone($event)">Make Payment</button>
             </form>
         </div>
     </div>
