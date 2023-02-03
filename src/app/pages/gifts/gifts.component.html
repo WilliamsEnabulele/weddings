@@ -27,21 +27,24 @@
 </div>
 
 <app-modal [title]="title" *ngIf="isModalOpen" (closed)="handleModalClose()">
-    <div *ngIf="sayThankYou">
-        <ng-lottie [options]="options"></ng-lottie>
-        <h1 class="text-center">Thank you</h1>
-    </div>
-    <div class="row" *ngIf="!sayThankYou">
-        <div class="col-12">
-            <form [formGroup]="form" (ngSubmit)="makePayment()">
-                <label>Email</label>
-                <input class="form-control mb-2" type="email" placeholder="Enter Email" formControlName="email">
-                <p class="error" *ngIf="fc.email.invalid">Email is required</p>
-                <label>Amount</label>
-                <input class="form-control" type="number" placeholder="Enter amount to be gifted" formControlName="amount">
-                <p class="error" *ngIf="fc.amount.invalid">Amount is required</p>
-                <button type="submit" class="btn btn-dark mt-2">Pay with Flutterwave</button>
-            </form>
+    <div class="overflow">
+        <div *ngIf="sayThankYou">
+            <ng-lottie [options]="options"></ng-lottie>
+            <h1 class="text-center">Thank you</h1>
+        </div>
+        <div class="row" *ngIf="!sayThankYou">
+            <div class="col-12">
+                <form [formGroup]="form" (ngSubmit)="makePayment()">
+                    <label>Email</label>
+                    <input class="form-control" type="email" placeholder="Enter Email" formControlName="email">
+                    <p class="error" *ngIf="fc.email.invalid">Email is required</p>
+                    <label>Amount</label>
+                    <input class="form-control" type="number" placeholder="Enter amount to be gifted" formControlName="amount">
+                    <p class="error" *ngIf="fc.amount.invalid">Amount is required</p>
+                    <button type="submit" class="btn btn-dark mt-2" [disabled]="form.invalid">Pay with Flutterwave</button>
+                </form>
+            </div>
         </div>
     </div>
+ 
 </app-modal>

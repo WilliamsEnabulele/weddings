@@ -81,6 +81,7 @@ export class LandingComponent {
 
   handleModalClose() {
     this.isModalOpen = false;
+    this.form.reset(this.form.value);
   }
 
   get fc() {

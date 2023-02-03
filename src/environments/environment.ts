@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    flutterwave_key: 'FLWPUBK_TEST-2c15f5634e4fcf98f94f93a81d8e5518-X',
+    flutterwave_key: 'FLWPUBK-83f2db90556b80d9244c857f33f6b1ba-X',
     firebaseConfig: {
         apiKey: "AIzaSyCJjQomyA8WzAsu4hpGLpdMA3YGYm9vC78",
         authDomain: "wedding-23859.firebaseapp.com",

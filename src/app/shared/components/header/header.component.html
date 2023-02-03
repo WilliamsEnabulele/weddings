@@ -1,10 +1,10 @@
-<nav class="wd-nav-bar">
-    <a class="wd-brand">Godwin^Ebele</a>
-    <div id="nav-icon" [ngClass]="{ 'open': isOpen }" (click)="openMenu()">
+<nav class="wd-nav-bar" (click)="openMenu()">
+    <div id="nav-icon" [ngClass]="{ 'open': isOpen }" >
         <span></span>
         <span></span>
         <span></span>
       </div>
+      MENU
 </nav>
 <div class="wd-collapse-nav" *ngIf="isOpen">
     <ul>

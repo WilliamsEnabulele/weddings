@@ -79,13 +79,15 @@ export class GiftsComponent {
 
 
   makePayment() {
+    if(this.form.invalid)
+      return;
     const customerDetails = {
-      email: this.fc.email.value,
+      email: this.form.get('email')?.value,
     };
     this.paymentData = {
       public_key: environment.flutterwave_key,
       tx_ref: this.generateReference(),
-      amount: this.fc.amount.value,
+      amount: this.form.get('amount')?.value,
       currency: "NGN",
       customer: customerDetails,
       payment_options: "card,ussd",
@@ -95,6 +97,7 @@ export class GiftsComponent {
     }
     this.flutterwave.inlinePay(this.paymentData);
   }
+
   calculateAndUpdateProgress() {
     let amount = this.form.get('amount')?.value;
     this.productService.getOne(this.currentProductId).pipe(
@@ -103,7 +106,7 @@ export class GiftsComponent {
       let currentPrice = (product.price! - amount!);
       const progress = Math.round(100 - ((currentPrice / product.price!) * 100));
       this.productService.update(this.currentProductId, { progress: progress });
-      this.form.reset()
+      this.form.reset(this.form.value);
       this.sayThankYou = true;
     })
   }
@@ -113,7 +116,8 @@ export class GiftsComponent {
   }
 
   closedPaymentModal(): void {
-    console.debug("payment is closed");
+    this.sayThankYou = false;
+    this.form.reset(this.form.value);
   }
 
   generateReference(): string {

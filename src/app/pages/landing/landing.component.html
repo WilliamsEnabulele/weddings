@@ -6,33 +6,40 @@
   </div>
   <app-count-down-timer></app-count-down-timer>
 </div>
-<div class="wd-container">
-  <div class="reveal">
-    <h3 class="text-center mt-5 mb-5">Well Wishes</h3>
-    <app-loader *ngIf="loading"></app-loader>
-    <div class="carousel-container" *ngIf="!loading">
-        <ng-container *ngFor="let wish of wishes; let i = index">
-          <div class="slide" [ngClass]="{ active: i === activeIndex}">
-            <div class="text-center text-dark">
-              <p class="mb-2 p-2"> {{wish?.message}}<span class="material-symbols-outlined icon">
-                format_quote
-                </span></p>
-              <span class="d-flex justify-content-center align-items-center">
-                <app-avatar [name]='wish.name!' [size]="avatarSize"></app-avatar>
-                <h6 class="ms-2">{{wish.name}}</h6>
-              </span>
-              <span><small>{{wish?.createdAt | date }}</small></span>
-            </div>
-          </div>
-        </ng-container>
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h3 class="text-center mt-5 mb-5">Well Wishes</h3>
     </div>
-    <div class="wd-btn-wrapper">
-      <button class="wd-btn" (click)="prevSlide()"><span class="material-symbols-outlined">
-        west
-        </span> Prev</button>
-      <button class="wd-btn" (click)="nextSlide()">Next <span class="material-symbols-outlined">
-        east
-        </span></button>
+    <div class="col-12 d-flex justify-content-center overflow p-5 mb-5">
+        <app-loader *ngIf="loading"></app-loader>
+        <div class="position-relative">
+          <div class="carousel-container" *ngIf="!loading">
+            <ng-container *ngFor="let wish of wishes; let i = index">
+              <div class="slide" [ngClass]="{ active: i === activeIndex}">
+                <div class="text-center text-dark">
+                  <p class="mb-2 p-2"> {{wish?.message}}<span class="material-symbols-outlined icon">
+                    format_quote
+                    </span></p>
+                  <span class="d-flex justify-content-center align-items-center">
+                    <app-avatar [name]='wish.name!' [size]="avatarSize"></app-avatar>
+                    <h6 class="ms-2">{{wish.name}}</h6>
+                  </span>
+                  <span><small>{{wish?.createdAt | date }}</small></span>
+                </div>
+              </div>
+            </ng-container>
+        </div>
+      <div class="wd-btn-wrapper">
+        <button class="wd-btn" (click)="prevSlide()"><span class="material-symbols-outlined">
+          west
+          </span> Prev</button>
+        <button class="wd-btn" (click)="nextSlide()">Next <span class="material-symbols-outlined">
+          east
+          </span></button>
+      </div>
+        </div>
+   
     </div>
   </div>
 </div>
