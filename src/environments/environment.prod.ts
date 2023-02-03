@@ -1,4 +1,5 @@
 export const environment = {
+    production: true,
     flutterwave_key: "#{FLUTTERWAVE_KEY}#",
     firebaseConfig: {
         apiKey: "AIzaSyCJjQomyA8WzAsu4hpGLpdMA3YGYm9vC78",

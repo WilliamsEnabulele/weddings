@@ -10,16 +10,11 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-
 import { FlutterwaveModule } from "flutterwave-angular-v3"
-
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 
 import { environment } from 'src/environments/environment';
-import { NgOptimizedImage } from '@angular/common'
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './pages/landing/landing.component';
@@ -34,7 +29,6 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { AvatarComponent } from './shared/components/avatar/avatar.component';
 import { CountDownTimerComponent } from './shared/components/count-down-timer/count-down-timer.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
-import { PaystackDirective } from './shared/directives/paystack.directive';
 
 declare var require: any;
 export const PaystackPop = require('@paystack/inline-js');
@@ -57,8 +51,7 @@ export function playerFactory() {
     ModalComponent,
     AvatarComponent,
     CountDownTimerComponent,
-    LoaderComponent,
-    PaystackDirective,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -68,8 +61,6 @@ export function playerFactory() {
     ReactiveFormsModule,
     FlexLayoutModule,
     FlutterwaveModule,
-    NgOptimizedImage,
-
     AngularFireModule.initializeApp(
       environment.firebaseConfig),
       AngularFireAuthModule,

@@ -1,4 +1,5 @@
 export const environment = {
+    production: false,
     flutterwave_key: 'FLWPUBK_TEST-2c15f5634e4fcf98f94f93a81d8e5518-X',
     firebaseConfig: {
         apiKey: "AIzaSyCJjQomyA8WzAsu4hpGLpdMA3YGYm9vC78",
