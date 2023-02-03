@@ -54,7 +54,7 @@ export class LandingComponent {
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-        )
+        ) 
       )
     ).subscribe({
       next: (data) => {

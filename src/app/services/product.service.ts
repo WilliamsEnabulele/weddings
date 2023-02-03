@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../shared/types/product';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +21,21 @@ export class ProductService {
     return this.productsRef;
   }
 
-  getOne(id: string){
-    return this.productsRef.doc(id).get();
+  getOne(id: string) : Observable<any> {
+    return this.db.doc<any>(this.dbPath + `/${id}`).valueChanges();
   }
 
   create(product: Product): any {
     return this.productsRef.add({ ...product });
   }
 
-  update(id: string, data: any): Promise<void> {
-    return this.productsRef.doc(id).update(data);
+  update(id: string, data: any) {
+    const productDoc = this.db.doc<any>(this.dbPath + `/${id}`);
+    return productDoc.update(data);
   }
 
-  delete(id: string): Promise<void> {
-    return this.productsRef.doc(id).delete();
+  delete(id: string){
+    const productDoc = this.db.doc<any>(this.dbPath + `/${id}`);
+    return productDoc.delete();
   }
 }

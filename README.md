@@ -1,5 +1,5 @@
 # Wedding
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b0060eee-c5b9-4822-9517-e7728a0fc62a/deploy-status)](https://app.netlify.com/sites/startling-lolly-a19b14/deploys)
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
 
 ## Development server

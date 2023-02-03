@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { map } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/shared/types/product';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import { environment } from 'src/environments/environment';
+import {
+  Flutterwave,
+  PaymentSuccessResponse,
+} from "flutterwave-angular-v3";
 
 @Component({
   selector: 'app-gifts',
@@ -17,28 +21,28 @@ export class GiftsComponent {
   title!: string;
   products!: Product[];
   currentPrice!: number;
-  product: any;
+  product!: Product;
   currentProductId!: string;
   isModalOpen = false;
   loading = true;
   sayThankYou = false;
-  key = environment.paystack_key;
+  key = environment.flutterwave_key;
+  paymentData: any;
+
+  form = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    amount: new FormControl(100, [Validators.required, Validators.minLength(100)])
+  });
+
+  constructor(
+    private productService: ProductService,
+    private flutterwave: Flutterwave
+  ) {
+  }
 
   options: AnimationOptions = {
     path: '/assets/lotties/confetti.json',
   };
-
-  animationCreated(animationItem: AnimationItem): void {
-    console.log(animationItem);
-  }
-
-  form = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    amount: new FormControl(0.00, [Validators.required, Validators.max(500000)])
-  });
-
-  constructor(private productService: ProductService) {
-  }
 
   openModal(id: any) {
     this.isModalOpen = true;
@@ -47,22 +51,12 @@ export class GiftsComponent {
 
   handleModalClose() {
     this.isModalOpen = false;
-    this.sayThankYou =false;
+    this.sayThankYou = false;
     this.form.reset();
   }
 
   ngOnInit() {
-    this.reference = `ref-${Math.ceil(Math.random() * 10e13)}`;
     this.getProducts();
-  }
-
-  calculateProgress(amount: any, id: string) {
-    this.productService.getOne(id).subscribe((data: Product) => {
-      console.log(data);
-      this.product = data;
-    })
-    let currentPrice = this.product.price - amount;
-    return 100 - ((currentPrice / this.product.price) * 100);
   }
 
   getProducts() {
@@ -76,26 +70,56 @@ export class GiftsComponent {
       next: (data: any) => {
         this.loading = false;
         this.products = data;
-      error: () => {
-        this.loading = false;
+        error: () => {
+          this.loading = false;
+        }
       }
-    }})
-  }
-
-  paymentDone(ref: any) {
-    this.title = 'Payment successfull, close modal';
-    console.log(ref);
-    let amount = this.form.get('amount')?.value;
-    let progress = this.calculateProgress(amount, this.currentProductId);
-    this.product.progress = progress;
-    this.productService.update(this.currentProductId, this.product).then(() => {
-      this.sayThankYou = true;
-      this.form.reset();
     })
   }
 
-  paymentCancel() {
-    console.log('payment failed');
+
+
+  makePayment() {
+    const customerDetails = {
+      email: this.fc.email.value,
+    };
+    this.paymentData = {
+      public_key: environment.flutterwave_key,
+      tx_ref: this.generateReference(),
+      amount: this.fc.amount.value,
+      currency: "NGN",
+      customer: customerDetails,
+      payment_options: "card,ussd",
+      callback: this.makePaymentCallback,
+      onclose: this.closedPaymentModal,
+      callbackContext: this,
+    }
+    this.flutterwave.inlinePay(this.paymentData);
+  }
+  calculateAndUpdateProgress() {
+    let amount = this.form.get('amount')?.value;
+    this.productService.getOne(this.currentProductId).pipe(
+      take(1)
+    ).subscribe((product: Product) => {
+      let currentPrice = (product.price! - amount!);
+      const progress = Math.round(100 - ((currentPrice / product.price!) * 100));
+      this.productService.update(this.currentProductId, { progress: progress });
+      this.form.reset()
+      this.sayThankYou = true;
+    })
+  }
+
+  makePaymentCallback(response: PaymentSuccessResponse): void {
+    this.calculateAndUpdateProgress();
+  }
+
+  closedPaymentModal(): void {
+    console.debug("payment is closed");
+  }
+
+  generateReference(): string {
+    let date = new Date();
+    return date.getTime().toString();
   }
 
   get fc() {

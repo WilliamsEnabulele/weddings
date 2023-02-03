@@ -16,7 +16,7 @@ export class CountDownTimerComponent implements OnInit, OnDestroy {
 
 
   constructor() {
-    this._end = new Date('2023-02-04').getTime();
+    this._end = new Date('2023-02-04 10:00').getTime();
   }
 
   ngOnInit() {
